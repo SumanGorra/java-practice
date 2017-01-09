@@ -1,0 +1,22 @@
+wap for given no is even or add
+
+package suman;
+import java.util.Scanner;
+public class Add {
+	public static void main(String []args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		if(n%2==0)
+		{
+			System.out.println("given no is even");
+		}
+			else
+		
+				System.out.println("given no is add");
+		}
+	}
+
+output:-
+5
+given no is add
