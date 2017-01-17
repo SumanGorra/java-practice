@@ -1,0 +1,179 @@
+//** sum of one digit **//
+
+package programs20;
+import java.util.Scanner;
+public class SumOfEachDigit {
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int s=sc.nextInt();
+		int sum=0;
+		while(s>0)
+		{
+		
+			int r=s%10;
+			sum=sum+r;
+			s=s/10;
+		}
+			System.out.println(sum);
+		
+	}
+
+}
+
+//** reverse number **//
+
+package programs20;
+import java.util.Scanner;
+public class ReverseOfNumber {
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter a no:");
+		int a=sc.nextInt();
+		int reverseno=0;
+		while(a!=0)
+		{
+			reverseno=reverseno*10;
+			reverseno=reverseno+a%10;
+			a=a/10;
+		}
+		System.out.println("reverse no :"+reverseno);
+	}
+
+}
+
+//** given no is perfect or not **//
+
+public class PrefectNumber {
+	public static void main(String[] args)
+	{
+		int sum=0;
+		Scanner sc=new Scanner(System.in);
+		int num=sc.nextInt();
+		for(int i=1;i<=num;i++)
+		{
+			if(num%i==0)
+			{
+				sum=sum+i;
+			}}
+			if(sum/2==num)
+			{
+				System.out.println("given no is perfect");
+			}
+				else
+				{
+					System.out.println("given no is not perfect");
+				}
+			
+		}
+	}
+
+
+//** write the given pattern **//
+
+*
+***
+*****
+*******
+*********
+
+package programs20;
+import java.io.*;
+public class pattern5 {
+public static void main(String[] args)
+{
+	for(int i=1;i<=5;i++)
+		
+	{
+		for(int j=1;j<=2*i-1;j++)
+		{
+			System.out.print("*");
+		}
+		System.out.println();
+	}
+}
+}
+
+//** given no's to highset no  **//
+
+package programs20;
+import java.util.Scanner;
+public class HighestNumber { 
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int a=sc.nextInt();
+		int aa[]=new int[a];
+		
+		for(int i=0;i<a;i++)
+		{
+			aa[i]=sc.nextInt();
+		}
+			int highest=0;
+			int secondhigh=0;
+			for(int n:aa)
+			{
+				if(highest<n)
+				{
+					secondhigh=highest;
+					highest=n;
+				}
+				else if(secondhigh<n)
+				{
+					secondhigh=n;
+				}
+			}
+			System.out.println("highest no is :"+highest);
+			System.out.println("second highest no is :"+secondhigh);
+		}
+	}
+
+
+//** given no is fibonacci or not **//
+
+package programs20;
+import java.util.Scanner;
+public class Fibonacci {
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int num1=0;int num2=1;
+		int num3;
+		int aa=sc.nextInt();
+		System.out.print(num1+" "+num2);
+		for(int i=2;i<=aa;i++)
+		{
+			num3=num2+num1;
+			System.out.print(" "+num3);
+			num1=num2;
+			num2=num3;
+			
+		}
+		
+	}
+
+}
+
+//** ArrayList program **//
+
+package programs20;
+import java.util.*;
+public class ArrayList1 {
+public static void main(String[] args)
+{
+	ArrayList sc=new ArrayList();
+	sc.add("suman");
+	sc.add("harsha");
+	sc.add("mounika");
+	sc.add("hameed");
+	sc.add(123);
+	sc.add('s');
+	sc.add("hameed");
+	sc.get(5);
+	sc.size();
+	sc.remove(3);
+	System.out.println(sc);
+	
+}
+}
