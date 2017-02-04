@@ -1,0 +1,176 @@
+//product detais and customer details
+
+query
+
+1.total purchuse made by sigle customer.
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class customer extends HttpServlet {
+
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException
+    {
+        
+        try
+        {
+            String id=req.getParameter("t1");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/product","root","root");
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from details where cusid='"+id+"'");
+            float price=0.0f;
+            while(rs.next())
+            {
+                price=price+rs.getFloat(5);
+            }
+            PrintWriter out=res.getWriter();
+            out.println("Cust Id :"+id+"Total purchase "+price);
+        }
+        catch(Exception e)
+        {
+            
+        }
+    
+                    }
+     }
+    
+=====================================================================================================================
+2.purchase made by all the customer between 1-jan to 31-jan.
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DateOperations extends HttpServlet{
+
+
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException
+    {
+        
+        try
+        {
+            String startdate=req.getParameter("t1");
+            String enddate=req.getParameter("t2");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/product","root","root");
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from details where date in between'"+startdate+"','"+enddate+"'" );
+            float price=0.0f;
+            while(rs.next())
+            {
+                price=price+rs.getFloat(5);
+            }
+            PrintWriter out=res.getWriter();
+            out.println("Total purchase "+startdate+" to "+enddate+" is "+price);
+        }
+        catch(Exception e)
+        {
+            
+        }
+    
+                    }
+     }
+    
+    
+===================================================================================================================
+3.display list of all the products where discount is>25%.
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ListOfProducts extends HttpServlet {
+
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException
+    {
+        
+        try
+        {
+            String startdate=req.getParameter("t1");
+            String enddate=req.getParameter("t2");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/product","root","root");
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from details where discount>25");
+            PrintWriter out=res.getWriter();
+            while(rs.next())
+            {
+            out.println(rs.getString(2));
+            }
+           
+           
+        }
+        catch(Exception e)
+        {
+            
+        }
+    
+                    }
+     }
+=======================================================================================================
+4.product categoory wise total sell.
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class ProductCategory extends HttpServlet
+{
+    public void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException
+    {
+        
+        try
+        {
+            String producttype=req.getParameter("t1");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/student","root","root");
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("select * from details where ptype='"+producttype+"'");
+           float price=0.0f;
+            while(rs.next())
+            {
+            price=price+rs.getFloat(5);
+            }
+            PrintWriter out=res.getWriter();
+            out.println(producttype+"total sales is"+price);
+        }
+        catch(Exception e)
+        {
+            
+        }
+    
+                    }
+     }
+    

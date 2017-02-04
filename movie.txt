@@ -1,0 +1,54 @@
+// movie details 
+
+query
+
+1.display  the  list of all the movies released between  1-jan to 31-jan.
+2.display the list of all the movies lings to "u" category.
+3.display the list of all the movies directed by "xyz" director.
+
+import java.sql.DriverManager;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.sql.*;
+import java.io.*;
+ import java.util.*;
+public class MovieDb extends HttpServlet
+{
+    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException
+    {
+        try{
+         Class.forName("com.mysql.jdbc.Driver");
+         Connection con = DriverManager.getConnection("jdbc:mysql:localhost/suman","root","root");
+         Statement st = con.createStatement();
+         ResultSet sc = st.executeQuery("select * from MovieDb where date in between 1-and 31-jan");
+         ArrayList arr = new ArrayList();
+         while(sc.next())
+         {
+             arr.add(rs.getString("1"));
+         }
+         ResultSet sc2 = st.executeQuery("select * from MOvie where category='u'");
+         ArrayList arr1 = new ArrayList();
+         while(sc2.next())
+         {
+                      arr2.add(rs2.getString(1));
+         }
+         ResultSet sc3 = st.executeQuery("select * from MOvie Where director ='sumanvarma'");
+         ArrayList arr2 = new ArrayList();
+         while(sc3.next())
+         {
+            
+             arr2.add(rs2.getString(1));
+         }
+         
+         
+         PrintWriter pw = res.getWriter();
+         pw.println("list of movies whose date is jan 1 to jan 31 "+arr);
+         pw.println("list of movies whose category is U "+arr1);
+         pw.println("list of movies which are directed by sumanvarma director "+arr2);
+         
+        } catch(Exception e)
+         {
+             System.out.println(e);
+         }
+    }
+}

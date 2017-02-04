@@ -1,0 +1,106 @@
+//employee details in databse
+
+query
+1.count total no of employees
+2.total emp department wise
+3.total emp city wise
+4.avg salary
+5.avg salary department wise
+6.how many emps are single as status.
+7.how many emps will retire in next 2 years(60 yrs).
+
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.sql.*;
+import java.io.*;
+import java.sql.DriverManager;
+public class Employee extends HttpServlet
+{
+    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql:localhost/suman","root","root");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from emp");
+            int count =0;
+            int d1count =0;
+            int d2count =0;
+            int citycount =0;
+            int city1count =0;
+            double sal=0.0d;
+            double d1sal =0.0d;
+            double dsal =0.0d;
+            int single =0;
+            int married =0;
+            int countage =0;
+            while(rs.next())
+            {
+                String id = rs.getString("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                double salary = rs.getDouble("salary");
+                String city = rs.getString("city");
+                String department = rs.getString("department");
+                String joindate = rs.getString("joindate");
+                String dob = rs.getString("dob");
+                String status = rs.getString("status");
+                count++;
+                 if(department.equals("administer"))
+                 {
+                     d1count++;
+                     d1sal=d1sal+salary;
+                     
+                 }
+                 else if(department.equals("menter"))
+                 {
+                     d2count++;
+                     dsal=dsal+salary;
+                 }
+                 if(city.equals("karimnagar"))
+                 {
+                     citycount++;
+                 }
+                 else if(city.equals("hyd"))
+                 {
+                     city1count++;
+                 }
+                 sal =sal+salary;
+                 if(status.equals("single"))
+                 {
+                     single++;
+                 }
+                 else if(status.equals("married"))
+                 {
+                     married++;
+                 }
+                 if(age>=58&&age<=60)
+                 {
+                     countage++;
+                 }
+                 double avgsal =(sal/count);
+                 double dsalavg=(dsal/d1count);
+                 double d1salavg=(d1sal/d2count);
+                 PrintWriter sc=res.getWriter();
+                 sc.println("the count of emp are :"+count);
+                 sc.println("count of the emp in department adminsiter :"+d1sal);
+                 sc.println("count of the emp in department menter :"+dsal);
+                 sc.println("count of the emp city :"+citycount);
+                 sc.println("count of the emp city1 :"+city1count);
+                 sc.println("total avg salary of the emps :"+sal);
+                 sc.println("count of the status single :"+single);
+                 sc.println("count of the status married :"+married);
+                 
+                 
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
+    
+}
+
